@@ -1,6 +1,7 @@
 package com.accenture.checkout;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,5 +72,12 @@ class OrderTest {
     order.addWeight("chicken", 0.84);
 
     assertThat(order.total()).isEqualTo(237);
+  }
+
+  @Test
+  void addUnit_withoutPrice_throws() {
+    assertThatThrownBy(() -> order.addUnit("salad"))
+        .isInstanceOf(MissingPriceException.class)
+        .hasMessageContaining("salad");
   }
 }

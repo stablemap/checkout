@@ -19,6 +19,9 @@ public class Order {
   }
 
   public void addUnit(String itemName) {
+    if (!pricesPerUnit.containsKey(itemName)) {
+      throw new MissingPriceException(itemName);
+    }
     total += pricesPerUnit.get(itemName);
   }
 
