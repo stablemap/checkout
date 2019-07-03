@@ -2,17 +2,17 @@ package com.accenture.checkout;
 
 public class Order {
 
-  private boolean hasWatermelon = false;
+  private int lastPrice = 0;
 
   public int total() {
-    return hasWatermelon ? 227 : 0;
+    return lastPrice;
   }
 
   public void setPricePerUnit(String itemName, int price) {
-
+    this.lastPrice = price;
   }
 
   public void addUnit(String itemName) {
-    hasWatermelon = true;
+
   }
 }
