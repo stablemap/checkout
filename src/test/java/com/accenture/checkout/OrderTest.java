@@ -62,4 +62,14 @@ class OrderTest {
 
     assertThat(order.total()).isEqualTo(95);
   }
+
+  @Test
+  void total_twoDifferentItemsByWeight_isSumOfPrices() {
+    order.setPricePerPound("beef", 179);
+    order.setPricePerPound("chicken", 169);
+    order.addWeight("beef", 0.53);
+    order.addWeight("chicken", 0.84);
+
+    assertThat(order.total()).isEqualTo(237);
+  }
 }
