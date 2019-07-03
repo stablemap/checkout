@@ -6,9 +6,18 @@ import org.junit.jupiter.api.Test;
 
 class OrderTest {
 
+  private Order order = new Order();
+
   @Test
   void total_emptyOrder_isZero() {
-    Order order = new Order();
     assertThat(order.total()).isZero();
+  }
+
+  @Test
+  void total_oneUnit_isUnitPrice() {
+    order.setPricePerUnit("watermelon", 227);
+    order.addUnit("watermelon");
+
+    assertThat(order.total()).isEqualTo(227);
   }
 }
