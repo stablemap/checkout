@@ -54,4 +54,12 @@ class OrderTest {
 
     assertThat(order.total()).isEqualTo(179);
   }
+
+  @Test
+  void total_fractionOfPoundOfItem_isSameFractionOfPrice() {
+    order.setPricePerPound("beef", 179);
+    order.addWeight("beef", 0.53);
+
+    assertThat(order.total()).isEqualTo(95);
+  }
 }

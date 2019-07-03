@@ -8,6 +8,7 @@ public class Order {
   private int total = 0;
 
   private Map<String, Integer> unitPrices = new HashMap<>();
+  private int lastPricePerPound = 0;
 
   public int total() {
     return total;
@@ -22,10 +23,10 @@ public class Order {
   }
 
   public void setPricePerPound(String itemName, int price) {
-    total = 179;
+    lastPricePerPound = price;
   }
 
   public void addWeight(String itemName, double weight) {
-
+    total += Math.ceil(weight * lastPricePerPound);
   }
 }
