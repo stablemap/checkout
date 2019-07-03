@@ -26,6 +26,9 @@ public class Order {
   }
 
   public void removeUnit(String itemName) {
+    if (total == 0) {
+      throw new MissingItemException(itemName);
+    }
     total -= pricesPerUnit.get(itemName);
   }
 

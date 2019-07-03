@@ -106,4 +106,11 @@ class OrderTest {
 
     assertThat(order.total()).isEqualTo(227);
   }
+
+  @Test
+  void removeUnit_emptyOrder_throws() {
+    assertThatThrownBy(() -> order.removeUnit("watermelon"))
+        .isInstanceOf(MissingItemException.class)
+        .hasMessageContaining("watermelon");
+  }
 }
