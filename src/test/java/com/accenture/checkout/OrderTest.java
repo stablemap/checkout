@@ -87,4 +87,13 @@ class OrderTest {
         .isInstanceOf(MissingPriceException.class)
         .hasMessageContaining("steak");
   }
+
+  @Test
+  void total_afterAddingAndRemovingUnit_isZero() {
+    order.setPricePerUnit("watermelon", 179);
+    order.addUnit("watermelon");
+    order.removeUnit("watermelon");
+
+    assertThat(order.total()).isZero();
+  }
 }

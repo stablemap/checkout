@@ -35,4 +35,8 @@ public class Order {
     }
     total += Math.ceil(weight * pricesPerPound.get(itemName));
   }
+
+  public void removeUnit(String itemName) {
+    total = 0;
+  }
 }
