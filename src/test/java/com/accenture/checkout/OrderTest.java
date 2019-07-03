@@ -90,10 +90,20 @@ class OrderTest {
 
   @Test
   void total_afterAddingAndRemovingUnit_isZero() {
-    order.setPricePerUnit("watermelon", 179);
+    order.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
     order.removeUnit("watermelon");
 
     assertThat(order.total()).isZero();
+  }
+
+  @Test
+  void total_afterAddingTwoUnitsAndRemovingOne_isUnitPrice() {
+    order.setPricePerUnit("watermelon", 227);
+    order.addUnit("watermelon");
+    order.addUnit("watermelon");
+    order.removeUnit("watermelon");
+
+    assertThat(order.total()).isEqualTo(227);
   }
 }

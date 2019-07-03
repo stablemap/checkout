@@ -25,6 +25,10 @@ public class Order {
     total += pricesPerUnit.get(itemName);
   }
 
+  public void removeUnit(String itemName) {
+    total -= pricesPerUnit.get(itemName);
+  }
+
   public void setPricePerPound(String itemName, int price) {
     pricesPerPound.put(itemName, price);
   }
@@ -34,9 +38,5 @@ public class Order {
       throw new MissingPriceException(itemName);
     }
     total += Math.ceil(weight * pricesPerPound.get(itemName));
-  }
-
-  public void removeUnit(String itemName) {
-    total = 0;
   }
 }
