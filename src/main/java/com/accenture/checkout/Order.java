@@ -3,9 +3,10 @@ package com.accenture.checkout;
 public class Order {
 
   private int lastPrice = 0;
+  private int total = 0;
 
   public int total() {
-    return lastPrice;
+    return total;
   }
 
   public void setPricePerUnit(String itemName, int price) {
@@ -13,6 +14,6 @@ public class Order {
   }
 
   public void addUnit(String itemName) {
-
+    total = lastPrice;
   }
 }

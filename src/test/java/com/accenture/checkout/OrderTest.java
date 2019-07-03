@@ -9,7 +9,13 @@ class OrderTest {
   private Order order = new Order();
 
   @Test
-  void total_emptyOrder_isZero() {
+  void total_noPricesEmptyOrder_isZero() {
+    assertThat(order.total()).isZero();
+  }
+
+  @Test
+  void total_onePriceEmptyOrder_isZero() {
+    order.setPricePerUnit("watermelon", 227);
     assertThat(order.total()).isZero();
   }
 
