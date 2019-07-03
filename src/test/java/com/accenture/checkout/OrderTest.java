@@ -35,4 +35,14 @@ class OrderTest {
 
     assertThat(order.total()).isEqualTo(454);
   }
+
+  @Test
+  void total_twoDifferentUnits_isSumOfUnitPrices() {
+    order.setPricePerUnit("watermelon", 227);
+    order.setPricePerUnit("beans", 188);
+    order.addUnit("watermelon");
+    order.addUnit("beans");
+
+    assertThat(order.total()).isEqualTo(415);
+  }
 }
