@@ -80,4 +80,11 @@ class OrderTest {
         .isInstanceOf(MissingPriceException.class)
         .hasMessageContaining("salad");
   }
+
+  @Test
+  void addWeight_withoutPrice_throws() {
+    assertThatThrownBy(() -> order.addWeight("steak", 1.0))
+        .isInstanceOf(MissingPriceException.class)
+        .hasMessageContaining("steak");
+  }
 }

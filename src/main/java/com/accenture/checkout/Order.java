@@ -30,6 +30,9 @@ public class Order {
   }
 
   public void addWeight(String itemName, double weight) {
+    if (!pricesPerPound.containsKey(itemName)) {
+      throw new MissingPriceException(itemName);
+    }
     total += Math.ceil(weight * pricesPerPound.get(itemName));
   }
 }
