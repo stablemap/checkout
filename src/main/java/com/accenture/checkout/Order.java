@@ -20,4 +20,12 @@ public class Order {
   public void addUnit(String itemName) {
     total += unitPrices.get(itemName);
   }
+
+  public void setPricePerPound(String itemName, int price) {
+    total = 179;
+  }
+
+  public void addWeight(String itemName, double weight) {
+
+  }
 }

@@ -16,6 +16,7 @@ class OrderTest {
   @Test
   void total_onePriceEmptyOrder_isZero() {
     order.setPricePerUnit("watermelon", 227);
+
     assertThat(order.total()).isZero();
   }
 
@@ -44,5 +45,13 @@ class OrderTest {
     order.addUnit("beans");
 
     assertThat(order.total()).isEqualTo(415);
+  }
+
+  @Test
+  void total_onePoundOfItem_isWeightPrice() {
+    order.setPricePerPound("beef", 179);
+    order.addWeight("beef", 1.00);
+
+    assertThat(order.total()).isEqualTo(179);
   }
 }
