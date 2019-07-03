@@ -26,4 +26,13 @@ class OrderTest {
 
     assertThat(order.total()).isEqualTo(227);
   }
+
+  @Test
+  void total_twoUnitsOfTheSameItem_isDoubleUnitPrice() {
+    order.setPricePerUnit("watermelon", 227);
+    order.addUnit("watermelon");
+    order.addUnit("watermelon");
+
+    assertThat(order.total()).isEqualTo(454);
+  }
 }

@@ -14,6 +14,6 @@ public class Order {
   }
 
   public void addUnit(String itemName) {
-    total = lastPrice;
+    total += lastPrice;
   }
 }
