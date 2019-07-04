@@ -7,7 +7,7 @@ public class PricingPolicy {
 
   private Map<String, Integer> pricesPerUnit = new HashMap<>();
   private Map<String, Integer> markdownPerUnit = new HashMap<>();
-  private Map<String, UnitPricing> xUnitsForYSpecials = new HashMap<>();
+  private Map<String, UnitPricing> unitPricing = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
@@ -27,8 +27,8 @@ public class PricingPolicy {
   }
 
   public int priceForUnits(String itemName, int count) {
-    if (xUnitsForYSpecials.containsKey(itemName)) {
-      return xUnitsForYSpecials.get(itemName).priceForUnits(count);
+    if (unitPricing.containsKey(itemName)) {
+      return unitPricing.get(itemName).priceForUnits(count);
     }
     return count * (pricesPerUnit.get(itemName) - markdownPerUnit.getOrDefault(itemName, 0));
   }
@@ -45,7 +45,7 @@ public class PricingPolicy {
     return (int) Math.ceil(pounds * pricesPerPound.get(itemName));
   }
 
-  public void setUnitSpecial(String itemName, XUnitsForYSpecial xUnitsForYSpecial) {
-    xUnitsForYSpecials.put(itemName, xUnitsForYSpecial);
+  public void setUnitSpecial(String itemName, UnitPricing pricingByMultiple) {
+    unitPricing.put(itemName, pricingByMultiple);
   }
 }
