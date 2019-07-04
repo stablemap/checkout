@@ -43,4 +43,13 @@ class PricingPolicyTest {
 
     assertThat(pricingPolicy.priceForUnits("milk", 1)).isEqualTo(299);
   }
+
+  @Test
+  void priceForUnits_itemWithUpdatedMarkdown_reflectsNewMarkdown() {
+    pricingPolicy.setPricePerUnit("milk", 399);
+    pricingPolicy.setMarkdownPerUnit("milk", 100);
+    pricingPolicy.setMarkdownPerUnit("milk", 200);
+
+    assertThat(pricingPolicy.priceForUnits("milk", 1)).isEqualTo(199);
+  }
 }

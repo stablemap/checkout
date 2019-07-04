@@ -6,6 +6,7 @@ import java.util.Map;
 public class PricingPolicy {
 
   private Map<String, Integer> pricesPerUnit = new HashMap<>();
+  private Map<String, Integer> markdownPerUnit = new HashMap<>();
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
@@ -16,7 +17,7 @@ public class PricingPolicy {
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
-    pricesPerUnit.put(itemName, pricesPerUnit.get(itemName) - amount);
+    markdownPerUnit.put(itemName, amount);
   }
 
   public boolean pricesUnit(String itemName) {
@@ -24,7 +25,7 @@ public class PricingPolicy {
   }
 
   public int priceForUnits(String itemName, int count) {
-    return count * pricesPerUnit.get(itemName);
+    return count * (pricesPerUnit.get(itemName) - markdownPerUnit.getOrDefault(itemName, 0));
   }
 
   public void setPricePerPound(String itemName, int price) {
