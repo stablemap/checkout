@@ -17,14 +17,14 @@ class OrderTest {
 
   @Test
   void total_onePriceEmptyOrder_isZero() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
 
     assertThat(order.total()).isZero();
   }
 
   @Test
   void total_oneUnit_isUnitPrice() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
 
     assertThat(order.total()).isEqualTo(227);
@@ -32,7 +32,7 @@ class OrderTest {
 
   @Test
   void total_twoUnitsOfTheSameItem_isDoubleUnitPrice() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
     order.addUnit("watermelon");
 
@@ -41,8 +41,8 @@ class OrderTest {
 
   @Test
   void total_twoDifferentUnits_isSumOfUnitPrices() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
-    pricingPolicy.setUnitPrice("beans", 188);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setPricePerUnit("beans", 188);
     order.addUnit("watermelon");
     order.addUnit("beans");
 
@@ -51,7 +51,7 @@ class OrderTest {
 
   @Test
   void total_onePoundOfItem_isWeightPrice() {
-    order.setPricePerPound("beef", 179);
+    pricingPolicy.setPricePerPound("beef", 179);
     order.addWeight("beef", 1.00);
 
     assertThat(order.total()).isEqualTo(179);
@@ -59,7 +59,7 @@ class OrderTest {
 
   @Test
   void total_fractionOfPoundOfItem_isSameFractionOfPrice() {
-    order.setPricePerPound("beef", 179);
+    pricingPolicy.setPricePerPound("beef", 179);
     order.addWeight("beef", 0.53);
 
     assertThat(order.total()).isEqualTo(95);
@@ -67,7 +67,7 @@ class OrderTest {
 
   @Test
   void total_twoWeightsOfSameItem_priceRoundedUpAtEnd() {
-    order.setPricePerPound("beef", 179);
+    pricingPolicy.setPricePerPound("beef", 179);
     order.addWeight("beef", 0.52);
     order.addWeight("beef", 0.52);
 
@@ -76,8 +76,8 @@ class OrderTest {
 
   @Test
   void total_twoDifferentItemsByWeight_isSumOfPrices() {
-    order.setPricePerPound("beef", 179);
-    order.setPricePerPound("chicken", 169);
+    pricingPolicy.setPricePerPound("beef", 179);
+    pricingPolicy.setPricePerPound("chicken", 169);
     order.addWeight("beef", 0.53);
     order.addWeight("chicken", 0.84);
 
@@ -100,7 +100,7 @@ class OrderTest {
 
   @Test
   void total_afterAddingAndRemovingUnit_isZero() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
     order.removeUnit("watermelon");
 
@@ -109,7 +109,7 @@ class OrderTest {
 
   @Test
   void total_afterAddingTwoUnitsAndRemovingOne_isUnitPrice() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
     order.addUnit("watermelon");
     order.removeUnit("watermelon");
@@ -126,8 +126,8 @@ class OrderTest {
 
   @Test
   void removeUnit_noSuchUnitsInOrder_throws() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
-    pricingPolicy.setUnitPrice("beans", 188);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setPricePerUnit("beans", 188);
     order.addUnit("watermelon");
 
     assertThatThrownBy(() -> order.removeUnit("beans"))
@@ -137,8 +137,8 @@ class OrderTest {
 
   @Test
   void removeUnit_oneUnitAddedAndRemoved_throws() {
-    pricingPolicy.setUnitPrice("watermelon", 227);
-    pricingPolicy.setUnitPrice("beans", 188);
+    pricingPolicy.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setPricePerUnit("beans", 188);
     order.addUnit("watermelon");
     order.addUnit("beans");
     order.removeUnit("beans");

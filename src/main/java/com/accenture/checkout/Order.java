@@ -9,8 +9,6 @@ public class Order {
   private PricingPolicy pricingPolicy;
 
   private Map<String, Integer> unitsHeld = new HashMap<>();
-
-  private Map<String, Integer> pricesPerPound = new HashMap<>();
   private Map<String, Double> weightHeld = new HashMap<>();
 
   public Order(PricingPolicy pricingPolicy) {
@@ -33,14 +31,14 @@ public class Order {
       String itemName = entry.getKey();
       double pounds = entry.getValue();
 
-      totalForUnits += Math.ceil(pounds * pricesPerPound.get(itemName));
+      totalForUnits += pricingPolicy.priceForWeight(itemName, pounds);
     }
 
     return totalForUnits + totalForWeight;
   }
 
   public void addUnit(String itemName) {
-    if (!pricingPolicy.pricesUnits(itemName)) {
+    if (!pricingPolicy.pricesUnit(itemName)) {
       throw new MissingPriceException(itemName);
     }
     unitsHeld.put(itemName, unitsHeld.getOrDefault(itemName, 0) + 1);
@@ -53,15 +51,10 @@ public class Order {
     unitsHeld.put(itemName, unitsHeld.get(itemName) - 1);
   }
 
-  public void setPricePerPound(String itemName, int price) {
-    weightHeld.put(itemName, 0.0);
-    pricesPerPound.put(itemName, price);
-  }
-
   public void addWeight(String itemName, double weight) {
-    if (!pricesPerPound.containsKey(itemName)) {
+    if (!pricingPolicy.pricesWeight(itemName)) {
       throw new MissingPriceException(itemName);
     }
-    weightHeld.put(itemName, weightHeld.get(itemName) + weight);
+    weightHeld.put(itemName, weightHeld.getOrDefault(itemName, 0.0) + weight);
   }
 }
