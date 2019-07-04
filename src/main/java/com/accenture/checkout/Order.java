@@ -1,7 +1,9 @@
 package com.accenture.checkout;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Order {
 
@@ -9,6 +11,8 @@ public class Order {
 
   private Map<String, Integer> pricesPerUnit = new HashMap<>();
   private Map<String, Integer> pricesPerPound = new HashMap<>();
+
+  private Set<String> presentItems = new HashSet<>();
 
   public int total() {
     return total;
@@ -22,11 +26,12 @@ public class Order {
     if (!pricesPerUnit.containsKey(itemName)) {
       throw new MissingPriceException(itemName);
     }
+    presentItems.add(itemName);
     total += pricesPerUnit.get(itemName);
   }
 
   public void removeUnit(String itemName) {
-    if (total == 0) {
+    if (!presentItems.contains(itemName)) {
       throw new MissingItemException(itemName);
     }
     total -= pricesPerUnit.get(itemName);
