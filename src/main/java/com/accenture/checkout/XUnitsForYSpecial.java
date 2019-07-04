@@ -1,6 +1,6 @@
 package com.accenture.checkout;
 
-public class XUnitsForYSpecial {
+public class XUnitsForYSpecial implements UnitPricing {
 
   private int count;
   private int price;
@@ -10,11 +10,9 @@ public class XUnitsForYSpecial {
     this.price = price;
   }
 
-  public int getCount() {
-    return count;
-  }
-
-  public int getPrice() {
-    return price;
+  @Override
+  public int priceForUnits(int count) {
+    double fraction = count / (double) this.count;
+    return (int) Math.ceil(fraction * price);
   }
 }
