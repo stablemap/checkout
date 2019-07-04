@@ -5,36 +5,28 @@ import java.util.Map;
 
 public class PricingPolicy {
 
-  private Map<String, Integer> basePricesPerUnit = new HashMap<>();
-  private Map<String, Integer> markdownPerUnit = new HashMap<>();
-  private Map<String, UnitPricing> unitPricing = new HashMap<>();
+  private Map<String, BasicUnitPricing> unitPrices = new HashMap<>();
+  private Map<String, SpecialUnitPricing> specialUnitPricing = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
-    if (price < 0) {
-      throw new IllegalArgumentException("Price " + price + " is negative");
-    }
-    basePricesPerUnit.put(itemName, price);
+    unitPrices.put(itemName, new BasicUnitPricing(price));
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
-    markdownPerUnit.put(itemName, amount);
+    unitPrices.get(itemName).setMarkdownPerUnit(amount);
   }
 
   public boolean pricesUnit(String itemName) {
-    return basePricesPerUnit.containsKey(itemName);
+    return unitPrices.containsKey(itemName);
   }
 
   public int priceForUnits(String itemName, int count) {
-    if (unitPricing.containsKey(itemName)) {
-      return unitPricing.get(itemName).priceForUnits(count, pricePerUnit(itemName));
+    if (specialUnitPricing.containsKey(itemName)) {
+      return specialUnitPricing.get(itemName).priceForUnits(count);
     }
-    return count * pricePerUnit(itemName);
-  }
-
-  private int pricePerUnit(String itemName) {
-    return basePricesPerUnit.get(itemName) - markdownPerUnit.getOrDefault(itemName, 0);
+    return unitPrices.get(itemName).priceForUnits(count);
   }
 
   public void setPricePerPound(String itemName, int price) {
@@ -49,7 +41,7 @@ public class PricingPolicy {
     return (int) Math.ceil(pounds * pricesPerPound.get(itemName));
   }
 
-  public void setUnitSpecial(String itemName, UnitPricing pricingByMultiple) {
-    unitPricing.put(itemName, pricingByMultiple);
+  public void setUnitSpecial(String itemName, SpecialUnitPricing pricingByMultiple) {
+    specialUnitPricing.put(itemName, pricingByMultiple);
   }
 }

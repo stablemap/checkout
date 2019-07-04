@@ -57,7 +57,7 @@ class PricingPolicyTest {
   @Test
   void priceForUnits_halfXUnitsWithXForYSpecial_costsHalfOfY() {
     pricingPolicy.setPricePerUnit("corn", 70);
-    pricingPolicy.setUnitSpecial("corn", new ByMultipleUnitPricing(8, 100));
+    pricingPolicy.setUnitSpecial("corn", new ByMultipleSpecialUnitPricing(8, 100));
 
     assertThat(pricingPolicy.priceForUnits("corn", 4)).isEqualTo(50);
   }

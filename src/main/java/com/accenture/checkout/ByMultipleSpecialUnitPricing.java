@@ -1,17 +1,17 @@
 package com.accenture.checkout;
 
-public class ByMultipleUnitPricing implements UnitPricing {
+public class ByMultipleSpecialUnitPricing implements SpecialUnitPricing {
 
   private int multiple;
   private int price;
 
-  public ByMultipleUnitPricing(int multiple, int price) {
+  public ByMultipleSpecialUnitPricing(int multiple, int price) {
     this.multiple = multiple;
     this.price = price;
   }
 
   @Override
-  public int priceForUnits(int count, int leftOverPerUnitPrice) {
+  public int priceForUnits(int count) {
     double fraction = count / (double) multiple;
     return (int) Math.ceil(fraction * price);
   }
