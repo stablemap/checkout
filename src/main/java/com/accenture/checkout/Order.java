@@ -57,4 +57,8 @@ public class Order {
     }
     weightHeld.put(itemName, weightHeld.getOrDefault(itemName, 0.0) + weight);
   }
+
+  public void removeWeight(String itemName, double weight) {
+    weightHeld.put(itemName, weightHeld.get(itemName) - weight);
+  }
 }
