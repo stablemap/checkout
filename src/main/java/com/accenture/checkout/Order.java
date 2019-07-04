@@ -2,10 +2,11 @@ package com.accenture.checkout;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Order {
 
-  private int total = 0;
+  private int totalForWeighedItems = 0;
 
   private Map<String, Integer> pricesPerUnit = new HashMap<>();
   private Map<String, Integer> pricesPerPound = new HashMap<>();
@@ -13,7 +14,16 @@ public class Order {
   private Map<String, Integer> unitsHeld = new HashMap<>();
 
   public int total() {
-    return total;
+    int totalForUnits = 0;
+
+    for (Entry<String, Integer> entry : unitsHeld.entrySet()) {
+      String itemName = entry.getKey();
+      Integer units = entry.getValue();
+
+      totalForUnits += units * pricesPerUnit.get(itemName);
+    }
+
+    return totalForUnits + totalForWeighedItems;
   }
 
   public void setPricePerUnit(String itemName, int price) {
@@ -26,7 +36,6 @@ public class Order {
       throw new MissingPriceException(itemName);
     }
     unitsHeld.put(itemName, unitsHeld.get(itemName) + 1);
-    total += pricesPerUnit.get(itemName);
   }
 
   public void removeUnit(String itemName) {
@@ -34,7 +43,6 @@ public class Order {
       throw new MissingItemException(itemName);
     }
     unitsHeld.put(itemName, unitsHeld.get(itemName) - 1);
-    total -= pricesPerUnit.get(itemName);
   }
 
   public void setPricePerPound(String itemName, int price) {
@@ -45,6 +53,6 @@ public class Order {
     if (!pricesPerPound.containsKey(itemName)) {
       throw new MissingPriceException(itemName);
     }
-    total += Math.ceil(weight * pricesPerPound.get(itemName));
+    totalForWeighedItems += Math.ceil(weight * pricesPerPound.get(itemName));
   }
 }
