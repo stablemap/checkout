@@ -15,6 +15,10 @@ public class PricingPolicy {
     pricesPerUnit.put(itemName, price);
   }
 
+  public void setMarkdownPerUnit(String itemName, int amount) {
+    pricesPerUnit.put(itemName, pricesPerUnit.get(itemName) - amount);
+  }
+
   public boolean pricesUnit(String itemName) {
     return pricesPerUnit.containsKey(itemName);
   }
