@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 
 class PricingPolicyTest {
+
   private PricingPolicy pricingPolicy = new PricingPolicy();
 
   @Test
@@ -51,5 +52,13 @@ class PricingPolicyTest {
     pricingPolicy.setMarkdownPerUnit("milk", 200);
 
     assertThat(pricingPolicy.priceForUnits("milk", 1)).isEqualTo(199);
+  }
+
+  @Test
+  void priceForUnits_halfXUnitsWithXForYSpecial_costsHalfOfY() {
+    pricingPolicy.setPricePerUnit("corn", 70);
+    pricingPolicy.setUnitSpecial("corn", new XUnitsForYSpecial(8, 100));
+
+    assertThat(pricingPolicy.priceForUnits("corn", 4)).isEqualTo(50);
   }
 }
