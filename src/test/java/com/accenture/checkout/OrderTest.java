@@ -124,4 +124,17 @@ class OrderTest {
         .isInstanceOf(MissingItemException.class)
         .hasMessageContaining("beans");
   }
+
+  @Test
+  void removeUnit_oneUnitAddedAndRemoved_throws() {
+    order.setPricePerUnit("watermelon", 227);
+    order.setPricePerUnit("beans", 188);
+    order.addUnit("watermelon");
+    order.addUnit("beans");
+    order.removeUnit("beans");
+
+    assertThatThrownBy(() -> order.removeUnit("beans"))
+        .isInstanceOf(MissingItemException.class)
+        .hasMessageContaining("beans");
+  }
 }
