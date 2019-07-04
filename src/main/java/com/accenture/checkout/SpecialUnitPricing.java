@@ -2,5 +2,5 @@ package com.accenture.checkout;
 
 public interface SpecialUnitPricing {
 
-  int priceForUnits(int count);
+  int priceForUnits(int count, BasicUnitPricing basicUnitPricing);
 }
