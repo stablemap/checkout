@@ -59,6 +59,10 @@ public class Order {
   }
 
   public void removeWeight(String itemName, double weight) {
-    weightHeld.put(itemName, weightHeld.get(itemName) - weight);
+    if (weightHeld.get(itemName) < weight) {
+      weightHeld.put(itemName, 0.0);
+    } else {
+      weightHeld.put(itemName, weightHeld.get(itemName) - weight);
+    }
   }
 }

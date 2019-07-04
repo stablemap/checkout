@@ -108,6 +108,15 @@ class OrderTest {
   }
 
   @Test
+  void total_moreWeightRemovedThanPresent_isZero() {
+    pricingPolicy.setPricePerPound("beef", 179);
+    order.addWeight("beef", 4.65);
+    order.removeWeight("beef", 5.00);
+
+    assertThat(order.total()).isZero();
+  }
+
+  @Test
   void total_afterAddingAndRemovingUnit_isZero() {
     pricingPolicy.setPricePerUnit("watermelon", 227);
     order.addUnit("watermelon");
