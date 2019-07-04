@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class PricingPolicy {
 
-  private Map<String, Integer> pricesPerUnit = new HashMap<>();
+  private Map<String, Integer> basePricesPerUnit = new HashMap<>();
   private Map<String, Integer> markdownPerUnit = new HashMap<>();
   private Map<String, UnitPricing> unitPricing = new HashMap<>();
 
@@ -15,7 +15,7 @@ public class PricingPolicy {
     if (price < 0) {
       throw new IllegalArgumentException("Price " + price + " is negative");
     }
-    pricesPerUnit.put(itemName, price);
+    basePricesPerUnit.put(itemName, price);
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
@@ -23,14 +23,18 @@ public class PricingPolicy {
   }
 
   public boolean pricesUnit(String itemName) {
-    return pricesPerUnit.containsKey(itemName);
+    return basePricesPerUnit.containsKey(itemName);
   }
 
   public int priceForUnits(String itemName, int count) {
     if (unitPricing.containsKey(itemName)) {
-      return unitPricing.get(itemName).priceForUnits(count);
+      return unitPricing.get(itemName).priceForUnits(count, pricePerUnit(itemName));
     }
-    return count * (pricesPerUnit.get(itemName) - markdownPerUnit.getOrDefault(itemName, 0));
+    return count * pricePerUnit(itemName);
+  }
+
+  private int pricePerUnit(String itemName) {
+    return basePricesPerUnit.get(itemName) - markdownPerUnit.getOrDefault(itemName, 0);
   }
 
   public void setPricePerPound(String itemName, int price) {

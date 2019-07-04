@@ -11,7 +11,7 @@ public class ByMultipleUnitPricing implements UnitPricing {
   }
 
   @Override
-  public int priceForUnits(int count) {
+  public int priceForUnits(int count, int leftOverPerUnitPrice) {
     double fraction = count / (double) multiple;
     return (int) Math.ceil(fraction * price);
   }
