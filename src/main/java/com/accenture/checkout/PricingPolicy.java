@@ -11,6 +11,10 @@ public class PricingPolicy {
     pricesPerUnit.put(itemName, unitPrice);
   }
 
+  public boolean pricesUnits(String itemName) {
+    return pricesPerUnit.containsKey(itemName);
+  }
+
   public int priceForUnits(String itemName, int count) {
     return count * pricesPerUnit.get(itemName);
   }

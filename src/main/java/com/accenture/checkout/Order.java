@@ -8,7 +8,6 @@ public class Order {
 
   private PricingPolicy pricingPolicy = new PricingPolicy();
 
-  private Map<String, Integer> pricesPerUnit = new HashMap<>();
   private Map<String, Integer> unitsHeld = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
@@ -38,12 +37,11 @@ public class Order {
 
   public void setPricePerUnit(String itemName, int price) {
     unitsHeld.put(itemName, 0);
-    pricesPerUnit.put(itemName, price);
     pricingPolicy.setUnitPrice(itemName, price);
   }
 
   public void addUnit(String itemName) {
-    if (!pricesPerUnit.containsKey(itemName)) {
+    if (!pricingPolicy.pricesUnits(itemName)) {
       throw new MissingPriceException(itemName);
     }
     unitsHeld.put(itemName, unitsHeld.get(itemName) + 1);
