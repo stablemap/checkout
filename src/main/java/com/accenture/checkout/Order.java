@@ -17,6 +17,7 @@ public class Order {
   }
 
   public void setPricePerUnit(String itemName, int price) {
+    unitsHeld.put(itemName, 0);
     pricesPerUnit.put(itemName, price);
   }
 
@@ -24,7 +25,7 @@ public class Order {
     if (!pricesPerUnit.containsKey(itemName)) {
       throw new MissingPriceException(itemName);
     }
-    unitsHeld.put(itemName, unitsHeld.getOrDefault(itemName, 0) + 1);
+    unitsHeld.put(itemName, unitsHeld.get(itemName) + 1);
     total += pricesPerUnit.get(itemName);
   }
 
