@@ -6,12 +6,11 @@ import java.util.Map.Entry;
 
 public class Order {
 
-  private int totalForWeighedItems = 0;
-
   private Map<String, Integer> pricesPerUnit = new HashMap<>();
-  private Map<String, Integer> pricesPerPound = new HashMap<>();
-
   private Map<String, Integer> unitsHeld = new HashMap<>();
+
+  private Map<String, Integer> pricesPerPound = new HashMap<>();
+  private Map<String, Double> weightHeld = new HashMap<>();
 
   public int total() {
     int totalForUnits = 0;
@@ -23,7 +22,16 @@ public class Order {
       totalForUnits += units * pricesPerUnit.get(itemName);
     }
 
-    return totalForUnits + totalForWeighedItems;
+    int totalForWeight = 0;
+
+    for (Entry<String, Double> entry : weightHeld.entrySet()) {
+      String itemName = entry.getKey();
+      double pounds = entry.getValue();
+
+      totalForUnits += Math.ceil(pounds * pricesPerPound.get(itemName));
+    }
+
+    return totalForUnits + totalForWeight;
   }
 
   public void setPricePerUnit(String itemName, int price) {
@@ -46,6 +54,7 @@ public class Order {
   }
 
   public void setPricePerPound(String itemName, int price) {
+    weightHeld.put(itemName, 0.0);
     pricesPerPound.put(itemName, price);
   }
 
@@ -53,6 +62,6 @@ public class Order {
     if (!pricesPerPound.containsKey(itemName)) {
       throw new MissingPriceException(itemName);
     }
-    totalForWeighedItems += Math.ceil(weight * pricesPerPound.get(itemName));
+    weightHeld.put(itemName, weightHeld.get(itemName) + weight);
   }
 }

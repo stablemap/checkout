@@ -65,6 +65,15 @@ class OrderTest {
   }
 
   @Test
+  void total_twoWeightsOfSameItem_priceRoundedUpAtEnd() {
+    order.setPricePerPound("beef", 179);
+    order.addWeight("beef", 0.52);
+    order.addWeight("beef", 0.52);
+
+    assertThat(order.total()).isEqualTo(187);
+  }
+
+  @Test
   void total_twoDifferentItemsByWeight_isSumOfPrices() {
     order.setPricePerPound("beef", 179);
     order.setPricePerPound("chicken", 169);
