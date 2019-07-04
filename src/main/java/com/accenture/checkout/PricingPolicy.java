@@ -9,6 +9,9 @@ public class PricingPolicy {
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
+    if (price < 0) {
+      throw new IllegalArgumentException("Price " + price + " is negative");
+    }
     pricesPerUnit.put(itemName, price);
   }
 
