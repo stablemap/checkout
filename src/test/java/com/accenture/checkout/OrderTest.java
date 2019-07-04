@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class OrderTest {
 
-  private Order order = new Order();
+  private PricingPolicy pricingPolicy = new PricingPolicy();
+  private Order order = new Order(pricingPolicy);
 
   @Test
   void total_noPricesEmptyOrder_isZero() {
@@ -16,14 +17,14 @@ class OrderTest {
 
   @Test
   void total_onePriceEmptyOrder_isZero() {
-    order.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setUnitPrice("watermelon", 227);
 
     assertThat(order.total()).isZero();
   }
 
   @Test
   void total_oneUnit_isUnitPrice() {
-    order.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setUnitPrice("watermelon", 227);
     order.addUnit("watermelon");
 
     assertThat(order.total()).isEqualTo(227);
@@ -31,7 +32,7 @@ class OrderTest {
 
   @Test
   void total_twoUnitsOfTheSameItem_isDoubleUnitPrice() {
-    order.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setUnitPrice("watermelon", 227);
     order.addUnit("watermelon");
     order.addUnit("watermelon");
 
@@ -40,8 +41,8 @@ class OrderTest {
 
   @Test
   void total_twoDifferentUnits_isSumOfUnitPrices() {
-    order.setPricePerUnit("watermelon", 227);
-    order.setPricePerUnit("beans", 188);
+    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setUnitPrice("beans", 188);
     order.addUnit("watermelon");
     order.addUnit("beans");
 
@@ -99,7 +100,7 @@ class OrderTest {
 
   @Test
   void total_afterAddingAndRemovingUnit_isZero() {
-    order.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setUnitPrice("watermelon", 227);
     order.addUnit("watermelon");
     order.removeUnit("watermelon");
 
@@ -108,7 +109,7 @@ class OrderTest {
 
   @Test
   void total_afterAddingTwoUnitsAndRemovingOne_isUnitPrice() {
-    order.setPricePerUnit("watermelon", 227);
+    pricingPolicy.setUnitPrice("watermelon", 227);
     order.addUnit("watermelon");
     order.addUnit("watermelon");
     order.removeUnit("watermelon");
@@ -125,8 +126,8 @@ class OrderTest {
 
   @Test
   void removeUnit_noSuchUnitsInOrder_throws() {
-    order.setPricePerUnit("watermelon", 227);
-    order.setPricePerUnit("beans", 188);
+    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setUnitPrice("beans", 188);
     order.addUnit("watermelon");
 
     assertThatThrownBy(() -> order.removeUnit("beans"))
@@ -136,8 +137,8 @@ class OrderTest {
 
   @Test
   void removeUnit_oneUnitAddedAndRemoved_throws() {
-    order.setPricePerUnit("watermelon", 227);
-    order.setPricePerUnit("beans", 188);
+    pricingPolicy.setUnitPrice("watermelon", 227);
+    pricingPolicy.setUnitPrice("beans", 188);
     order.addUnit("watermelon");
     order.addUnit("beans");
     order.removeUnit("beans");

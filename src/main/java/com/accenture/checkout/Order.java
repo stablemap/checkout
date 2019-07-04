@@ -6,12 +6,16 @@ import java.util.Map.Entry;
 
 public class Order {
 
-  private PricingPolicy pricingPolicy = new PricingPolicy();
+  private PricingPolicy pricingPolicy;
 
   private Map<String, Integer> unitsHeld = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
   private Map<String, Double> weightHeld = new HashMap<>();
+
+  public Order(PricingPolicy pricingPolicy) {
+    this.pricingPolicy = pricingPolicy;
+  }
 
   public int total() {
     int totalForUnits = 0;
@@ -35,16 +39,11 @@ public class Order {
     return totalForUnits + totalForWeight;
   }
 
-  public void setPricePerUnit(String itemName, int price) {
-    unitsHeld.put(itemName, 0);
-    pricingPolicy.setUnitPrice(itemName, price);
-  }
-
   public void addUnit(String itemName) {
     if (!pricingPolicy.pricesUnits(itemName)) {
       throw new MissingPriceException(itemName);
     }
-    unitsHeld.put(itemName, unitsHeld.get(itemName) + 1);
+    unitsHeld.put(itemName, unitsHeld.getOrDefault(itemName, 0) + 1);
   }
 
   public void removeUnit(String itemName) {
