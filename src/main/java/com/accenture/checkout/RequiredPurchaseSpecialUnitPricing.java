@@ -14,9 +14,9 @@ public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
 
   @Override
   public int priceForUnits(int count, BasicUnitPricing basicUnitPricing) {
-    if (count <= requiredUnits) {
-      return basicUnitPricing.priceForUnits(count);
-    }
-    return 599;
+    int numBlocks = (int) Math.ceil(count / (double) (requiredUnits + discountedUnits));
+    int numDiscounted = count - numBlocks * requiredUnits;
+
+    return basicUnitPricing.priceForUnits(count - numDiscounted) + (int) Math.ceil((discount / 100.0) * basicUnitPricing.priceForUnits(numDiscounted));
   }
 }

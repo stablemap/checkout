@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class RequiredPurchaseSpecialUnitPricingTest {
 
   @Test
-  void priceForUnits_twoItemsBogoHalfOff_correctTotal() {
+  void priceForUnits_twoItemsBogoHalfOff_oneDiscounted() {
     RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
     BasicUnitPricing basicUnitPricing = new BasicUnitPricing(399);
 
@@ -20,5 +20,13 @@ class RequiredPurchaseSpecialUnitPricingTest {
     BasicUnitPricing basicUnitPricing = new BasicUnitPricing(399);
 
     assertThat(requiredPurchasePricing.priceForUnits(1, basicUnitPricing)).isEqualTo(399);
+  }
+
+  @Test
+  void priceForUnits_threeItemsBogoHalfOff_oneDiscounted() {
+    RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
+    BasicUnitPricing basicUnitPricing = new BasicUnitPricing(399);
+
+    assertThat(requiredPurchasePricing.priceForUnits(3, basicUnitPricing)).isEqualTo(998);
   }
 }
