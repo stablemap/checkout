@@ -13,8 +13,8 @@ public class LimitedSpecialPricing implements SpecialPricing {
   @Override
   public int priceFor(double itemQuantity, LinearPricing linearPricing) {
     if (itemQuantity > unitLimit) {
-      return specialPricing.priceFor(unitLimit, linearPricing) + linearPricing
-          .priceFor(itemQuantity - unitLimit);
+      return specialPricing.priceFor(unitLimit, linearPricing)
+          + linearPricing.priceFor(itemQuantity - unitLimit);
     }
     return specialPricing.priceFor(itemQuantity, null);
   }

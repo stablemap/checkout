@@ -15,7 +15,13 @@ order at any time:
   order.addUnit("cheese");
   log.info("Order subtotal is " + order.total());
 
-Note that all prices are given in cents. More complex pricing is available -- an offer for 5 units
+Note that all prices are given in cents. More complex pricing is available -- an offer for 5 bricks
 of cheese for $3 can be encoded as follows:
 
   pricingPolicy.setUnitSpecial("cheese", new BulkPricing(3, 500));
+
+One can also limit the extent of a special by wrapping it appropriately:
+
+  new LimitedSpecialPricing(new BulkPricing(3, 500), 6)
+
+will cause the 7th brick purchased to cost the normal amount.
