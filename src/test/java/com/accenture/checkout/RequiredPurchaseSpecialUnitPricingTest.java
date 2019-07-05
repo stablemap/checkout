@@ -29,4 +29,12 @@ class RequiredPurchaseSpecialUnitPricingTest {
 
     assertThat(requiredPurchasePricing.priceForUnits(3, linearItemPricing)).isEqualTo(998);
   }
+
+  @Test
+  void priceForUnits_sixItemsBuyTwoGetThreeFree_payForThree() {
+    RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(2, 3, 100);
+    LinearItemPricing linearItemPricing = new LinearItemPricing(329);
+
+    assertThat(requiredPurchasePricing.priceForUnits(6, linearItemPricing)).isEqualTo(987);
+  }
 }

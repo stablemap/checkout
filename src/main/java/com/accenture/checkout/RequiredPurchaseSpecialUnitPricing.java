@@ -14,10 +14,14 @@ public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
 
   @Override
   public int priceForUnits(int count, LinearItemPricing linearItemPricing) {
-    int numBlocks = (int) Math.ceil(count / (double) (requiredUnits + discountedUnits));
-    int numDiscounted = count - numBlocks * requiredUnits;
+    double blockSize = requiredUnits + discountedUnits;
+    int completeBlocks = (int) Math.floor(count / blockSize);
+    double incompleteBlock = count - completeBlocks * blockSize;
 
-    return linearItemPricing.priceFor(count - numDiscounted) + (int) Math.ceil((discount / 100.0) * linearItemPricing
+    double withNormalPricing = completeBlocks * requiredUnits + Math.min(blockSize, incompleteBlock);
+    double numDiscounted = count - withNormalPricing;
+
+    return linearItemPricing.priceFor(withNormalPricing) + (int) Math.ceil(((100.0 - discount) / 100.0) * linearItemPricing
         .priceFor(numDiscounted));
   }
 }
