@@ -12,6 +12,9 @@ public class LimitedSpecialUnitPricing implements SpecialUnitPricing {
 
   @Override
   public int priceForUnits(int count, BasicUnitPricing basicUnitPricing) {
+    if (count > unitLimit) {
+      return specialUnitPricing.priceForUnits(unitLimit, basicUnitPricing) + basicUnitPricing.priceForUnits(count - unitLimit);
+    }
     return specialUnitPricing.priceForUnits(count, null);
   }
 }
