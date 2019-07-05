@@ -11,9 +11,9 @@ public class LimitedSpecialUnitPricing implements SpecialUnitPricing {
   }
 
   @Override
-  public int priceForUnits(int count, FractionalItemPricing fractionalItemPricing) {
+  public int priceForUnits(int count, LinearItemPricing linearItemPricing) {
     if (count > unitLimit) {
-      return specialUnitPricing.priceForUnits(unitLimit, fractionalItemPricing) + fractionalItemPricing
+      return specialUnitPricing.priceForUnits(unitLimit, linearItemPricing) + linearItemPricing
           .priceFor(count - unitLimit);
     }
     return specialUnitPricing.priceForUnits(count, null);

@@ -13,11 +13,11 @@ public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
   }
 
   @Override
-  public int priceForUnits(int count, FractionalItemPricing fractionalItemPricing) {
+  public int priceForUnits(int count, LinearItemPricing linearItemPricing) {
     int numBlocks = (int) Math.ceil(count / (double) (requiredUnits + discountedUnits));
     int numDiscounted = count - numBlocks * requiredUnits;
 
-    return fractionalItemPricing.priceFor(count - numDiscounted) + (int) Math.ceil((discount / 100.0) * fractionalItemPricing
+    return linearItemPricing.priceFor(count - numDiscounted) + (int) Math.ceil((discount / 100.0) * linearItemPricing
         .priceFor(numDiscounted));
   }
 }

@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class PricingPolicy {
 
-  private Map<String, FractionalItemPricing> unitPrices = new HashMap<>();
+  private Map<String, LinearItemPricing> unitPrices = new HashMap<>();
   private Map<String, SpecialUnitPricing> specialUnitPricing = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
-    unitPrices.put(itemName, new FractionalItemPricing(price));
+    unitPrices.put(itemName, new LinearItemPricing(price));
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
-    unitPrices.get(itemName).setMarkdownPerUnit(amount);
+    unitPrices.get(itemName).setMarkdown(amount);
   }
 
   public boolean pricesUnit(String itemName) {
