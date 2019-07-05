@@ -1,3 +1,5 @@
+A performance of the [checkout kata](https://github.com/PillarTechnology/kata-checkout-order-total).
+
 This project is developed on JDK 8. To run the tests, execute
 
 ```shell
