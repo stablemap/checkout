@@ -13,4 +13,12 @@ class RequiredPurchaseSpecialUnitPricingTest {
 
     assertThat(requiredPurchasePricing.priceForUnits(2, basicUnitPricing)).isEqualTo(599);
   }
+
+  @Test
+  void priceForUnits_oneItemBogoHalfOff_normalPrice() {
+    RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
+    BasicUnitPricing basicUnitPricing = new BasicUnitPricing(399);
+
+    assertThat(requiredPurchasePricing.priceForUnits(1, basicUnitPricing)).isEqualTo(399);
+  }
 }

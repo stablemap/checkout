@@ -2,9 +2,9 @@ package com.accenture.checkout;
 
 public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
 
-  private final int requiredUnits;
-  private final int discountedUnits;
-  private final int discount;
+  private int requiredUnits;
+  private int discountedUnits;
+  private int discount;
 
   public RequiredPurchaseSpecialUnitPricing(int requiredUnits, int discountedUnits, int discount) {
     this.requiredUnits = requiredUnits;
@@ -14,6 +14,9 @@ public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
 
   @Override
   public int priceForUnits(int count, BasicUnitPricing basicUnitPricing) {
+    if (count <= requiredUnits) {
+      return basicUnitPricing.priceForUnits(count);
+    }
     return 599;
   }
 }
