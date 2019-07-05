@@ -13,7 +13,7 @@ public class RequiredPurchaseSpecialPricing implements SpecialPricing {
   }
 
   @Override
-  public int priceFor(double count, LinearItemPricing linearItemPricing) {
+  public int priceFor(double count, LinearPricing linearPricing) {
     double blockSize = requiredUnits + discountedUnits;
     int completeBlocks = (int) Math.floor(count / blockSize);
     double incompleteBlock = count - completeBlocks * blockSize;
@@ -21,7 +21,7 @@ public class RequiredPurchaseSpecialPricing implements SpecialPricing {
     double withNormalPricing = completeBlocks * requiredUnits + Math.min(blockSize, incompleteBlock);
     double numDiscounted = count - withNormalPricing;
 
-    return linearItemPricing.priceFor(withNormalPricing) + (int) Math.ceil(((100.0 - discount) / 100.0) * linearItemPricing
+    return linearPricing.priceFor(withNormalPricing) + (int) Math.ceil(((100.0 - discount) / 100.0) * linearPricing
         .priceFor(numDiscounted));
   }
 }

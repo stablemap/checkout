@@ -1,11 +1,11 @@
 package com.accenture.checkout;
 
-public class LinearItemPricing {
+public class LinearPricing {
 
   private int basePrice;
   private int markdown = 0;
 
-  LinearItemPricing(int basePrice) {
+  LinearPricing(int basePrice) {
     if (basePrice < 0) {
       throw new IllegalArgumentException("Price " + basePrice + " is negative");
     }

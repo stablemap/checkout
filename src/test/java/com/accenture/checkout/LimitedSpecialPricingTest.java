@@ -8,7 +8,7 @@ class LimitedSpecialPricingTest {
 
   private XForYSpecialPricing xfysup = new XForYSpecialPricing(8, 100);
   private LimitedSpecialPricing lsup = new LimitedSpecialPricing(xfysup, 8);
-  private LinearItemPricing bup = new LinearItemPricing(70);
+  private LinearPricing bup = new LinearPricing(70);
 
   @Test
   void priceForUnits_underLimit_appliesSpecialToAllUnits() {

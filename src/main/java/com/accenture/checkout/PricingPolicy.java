@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class PricingPolicy {
 
-  private Map<String, LinearItemPricing> unitPrices = new HashMap<>();
+  private Map<String, LinearPricing> unitPrices = new HashMap<>();
   private Map<String, SpecialPricing> unitSpecials = new HashMap<>();
 
-  private Map<String, LinearItemPricing> weightPrices = new HashMap<>();
+  private Map<String, LinearPricing> weightPrices = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
-    unitPrices.put(itemName, new LinearItemPricing(price));
+    unitPrices.put(itemName, new LinearPricing(price));
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
@@ -30,7 +30,7 @@ public class PricingPolicy {
   }
 
   public void setPricePerPound(String itemName, int price) {
-    weightPrices.put(itemName, new LinearItemPricing(price));
+    weightPrices.put(itemName, new LinearPricing(price));
   }
 
   public boolean pricesWeight(String itemName) {

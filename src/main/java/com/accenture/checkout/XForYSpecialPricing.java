@@ -11,8 +11,8 @@ public class XForYSpecialPricing implements SpecialPricing {
   }
 
   @Override
-  public int priceFor(double count, LinearItemPricing linearItemPricing) {
-    double fraction = count / multiple;
+  public int priceFor(double quantity, LinearPricing linearPricing) {
+    double fraction = quantity / multiple;
     return (int) Math.ceil(fraction * price);
   }
 }
