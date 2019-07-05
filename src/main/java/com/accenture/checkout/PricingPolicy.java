@@ -24,7 +24,7 @@ public class PricingPolicy {
 
   public int priceForUnits(String itemName, int count) {
     if (specialUnitPricing.containsKey(itemName)) {
-      return specialUnitPricing.get(itemName).priceForUnits(count, unitPrices.get(itemName));
+      return specialUnitPricing.get(itemName).priceFor(count, unitPrices.get(itemName));
     }
     return unitPrices.get(itemName).priceFor(count);
   }

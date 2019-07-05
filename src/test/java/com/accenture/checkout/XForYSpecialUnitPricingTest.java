@@ -11,11 +11,11 @@ class XForYSpecialUnitPricingTest {
 
   @Test
   void priceForUnits_halfSpecialMultiple_isHalfOfSpecialPrice() {
-    assertThat(xfysup.priceForUnits(4, linearItemPricing)).isEqualTo(50);
+    assertThat(xfysup.priceFor(4, linearItemPricing)).isEqualTo(50);
   }
 
   @Test
   void priceForUnits_fractionOfSpecialMultiple_isSameFractionOfSpecialPriceRoundedUp() {
-    assertThat(xfysup.priceForUnits(5, linearItemPricing)).isEqualTo(63);
+    assertThat(xfysup.priceFor(5, linearItemPricing)).isEqualTo(63);
   }
 }

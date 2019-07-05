@@ -13,7 +13,7 @@ public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
   }
 
   @Override
-  public int priceForUnits(int count, LinearItemPricing linearItemPricing) {
+  public int priceFor(double count, LinearItemPricing linearItemPricing) {
     double blockSize = requiredUnits + discountedUnits;
     int completeBlocks = (int) Math.floor(count / blockSize);
     double incompleteBlock = count - completeBlocks * blockSize;

@@ -11,7 +11,7 @@ class RequiredPurchaseSpecialUnitPricingTest {
     RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
     LinearItemPricing linearItemPricing = new LinearItemPricing(399);
 
-    assertThat(requiredPurchasePricing.priceForUnits(2, linearItemPricing)).isEqualTo(599);
+    assertThat(requiredPurchasePricing.priceFor(2, linearItemPricing)).isEqualTo(599);
   }
 
   @Test
@@ -19,7 +19,7 @@ class RequiredPurchaseSpecialUnitPricingTest {
     RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
     LinearItemPricing linearItemPricing = new LinearItemPricing(399);
 
-    assertThat(requiredPurchasePricing.priceForUnits(1, linearItemPricing)).isEqualTo(399);
+    assertThat(requiredPurchasePricing.priceFor(1, linearItemPricing)).isEqualTo(399);
   }
 
   @Test
@@ -27,7 +27,7 @@ class RequiredPurchaseSpecialUnitPricingTest {
     RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(1, 1, 50);
     LinearItemPricing linearItemPricing = new LinearItemPricing(399);
 
-    assertThat(requiredPurchasePricing.priceForUnits(3, linearItemPricing)).isEqualTo(998);
+    assertThat(requiredPurchasePricing.priceFor(3, linearItemPricing)).isEqualTo(998);
   }
 
   @Test
@@ -35,6 +35,6 @@ class RequiredPurchaseSpecialUnitPricingTest {
     RequiredPurchaseSpecialUnitPricing requiredPurchasePricing = new RequiredPurchaseSpecialUnitPricing(2, 3, 100);
     LinearItemPricing linearItemPricing = new LinearItemPricing(329);
 
-    assertThat(requiredPurchasePricing.priceForUnits(6, linearItemPricing)).isEqualTo(987);
+    assertThat(requiredPurchasePricing.priceFor(6, linearItemPricing)).isEqualTo(987);
   }
 }
