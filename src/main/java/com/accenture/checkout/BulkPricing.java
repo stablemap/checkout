@@ -1,5 +1,7 @@
 package com.accenture.checkout;
 
+import static com.accenture.checkout.Utilities.ceil;
+
 public class BulkPricing implements SpecialPricing {
 
   private double multiple;
@@ -13,6 +15,6 @@ public class BulkPricing implements SpecialPricing {
   @Override
   public int priceFor(double quantity, LinearPricing linearPricing) {
     double fraction = quantity / multiple;
-    return (int) Math.ceil(fraction * price);
+    return ceil(fraction * price);
   }
 }

@@ -1,6 +1,8 @@
 package com.accenture.checkout;
 
-public class LinearPricing {
+import static com.accenture.checkout.Utilities.ceil;
+
+class LinearPricing {
 
   private int basePrice;
   private int markdown = 0;
@@ -17,6 +19,6 @@ public class LinearPricing {
   }
 
   int priceFor(double itemAmount) {
-    return (int) Math.ceil(itemAmount * (basePrice - markdown));
+    return ceil(itemAmount * (basePrice - markdown));
   }
 }
