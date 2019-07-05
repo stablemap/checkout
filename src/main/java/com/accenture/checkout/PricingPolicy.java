@@ -8,7 +8,7 @@ public class PricingPolicy {
   private Map<String, LinearItemPricing> unitPrices = new HashMap<>();
   private Map<String, SpecialPricing> unitSpecials = new HashMap<>();
 
-  private Map<String, Integer> pricesPerPound = new HashMap<>();
+  private Map<String, LinearItemPricing> weightPrices = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
     unitPrices.put(itemName, new LinearItemPricing(price));
@@ -30,15 +30,15 @@ public class PricingPolicy {
   }
 
   public void setPricePerPound(String itemName, int price) {
-    pricesPerPound.put(itemName, price);
+    weightPrices.put(itemName, new LinearItemPricing(price));
   }
 
   public boolean pricesWeight(String itemName) {
-    return pricesPerPound.containsKey(itemName);
+    return weightPrices.containsKey(itemName);
   }
 
   public int priceForWeight(String itemName, double pounds) {
-    return (int) Math.ceil(pounds * pricesPerPound.get(itemName));
+    return weightPrices.get(itemName).priceFor(pounds);
   }
 
   public void setUnitSpecial(String itemName, SpecialPricing pricingByMultiple) {
