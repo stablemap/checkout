@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class PricingPolicy {
 
-  private Map<String, BasicUnitPricing> unitPrices = new HashMap<>();
+  private Map<String, FractionalItemPricing> unitPrices = new HashMap<>();
   private Map<String, SpecialUnitPricing> specialUnitPricing = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
   public void setPricePerUnit(String itemName, int price) {
-    unitPrices.put(itemName, new BasicUnitPricing(price));
+    unitPrices.put(itemName, new FractionalItemPricing(price));
   }
 
   public void setMarkdownPerUnit(String itemName, int amount) {
@@ -26,7 +26,7 @@ public class PricingPolicy {
     if (specialUnitPricing.containsKey(itemName)) {
       return specialUnitPricing.get(itemName).priceForUnits(count, unitPrices.get(itemName));
     }
-    return unitPrices.get(itemName).priceForUnits(count);
+    return unitPrices.get(itemName).priceFor(count);
   }
 
   public void setPricePerPound(String itemName, int price) {
