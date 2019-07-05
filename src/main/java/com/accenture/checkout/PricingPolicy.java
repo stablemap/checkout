@@ -6,7 +6,7 @@ import java.util.Map;
 public class PricingPolicy {
 
   private Map<String, LinearItemPricing> unitPrices = new HashMap<>();
-  private Map<String, SpecialUnitPricing> specialUnitPricing = new HashMap<>();
+  private Map<String, SpecialPricing> unitSpecials = new HashMap<>();
 
   private Map<String, Integer> pricesPerPound = new HashMap<>();
 
@@ -23,8 +23,8 @@ public class PricingPolicy {
   }
 
   public int priceForUnits(String itemName, int count) {
-    if (specialUnitPricing.containsKey(itemName)) {
-      return specialUnitPricing.get(itemName).priceFor(count, unitPrices.get(itemName));
+    if (unitSpecials.containsKey(itemName)) {
+      return unitSpecials.get(itemName).priceFor(count, unitPrices.get(itemName));
     }
     return unitPrices.get(itemName).priceFor(count);
   }
@@ -41,7 +41,7 @@ public class PricingPolicy {
     return (int) Math.ceil(pounds * pricesPerPound.get(itemName));
   }
 
-  public void setUnitSpecial(String itemName, SpecialUnitPricing pricingByMultiple) {
-    specialUnitPricing.put(itemName, pricingByMultiple);
+  public void setUnitSpecial(String itemName, SpecialPricing pricingByMultiple) {
+    unitSpecials.put(itemName, pricingByMultiple);
   }
 }

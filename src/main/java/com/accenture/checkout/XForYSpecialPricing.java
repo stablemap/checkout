@@ -1,11 +1,11 @@
 package com.accenture.checkout;
 
-public class XForYSpecialUnitPricing implements SpecialUnitPricing {
+public class XForYSpecialPricing implements SpecialPricing {
 
   private double multiple;
   private int price;
 
-  public XForYSpecialUnitPricing(double multiple, int price) {
+  public XForYSpecialPricing(double multiple, int price) {
     this.multiple = multiple;
     this.price = price;
   }

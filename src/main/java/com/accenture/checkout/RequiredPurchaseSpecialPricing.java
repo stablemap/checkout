@@ -1,12 +1,12 @@
 package com.accenture.checkout;
 
-public class RequiredPurchaseSpecialUnitPricing implements SpecialUnitPricing {
+public class RequiredPurchaseSpecialPricing implements SpecialPricing {
 
   private int requiredUnits;
   private int discountedUnits;
   private int discount;
 
-  public RequiredPurchaseSpecialUnitPricing(int requiredUnits, int discountedUnits, int discount) {
+  public RequiredPurchaseSpecialPricing(int requiredUnits, int discountedUnits, int discount) {
     this.requiredUnits = requiredUnits;
     this.discountedUnits = discountedUnits;
     this.discount = discount;

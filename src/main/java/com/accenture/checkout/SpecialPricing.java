@@ -1,6 +1,6 @@
 package com.accenture.checkout;
 
-public interface SpecialUnitPricing {
+public interface SpecialPricing {
 
   int priceFor(double itemQuantity, LinearItemPricing linearItemPricing);
 }

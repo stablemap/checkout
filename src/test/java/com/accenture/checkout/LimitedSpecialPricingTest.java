@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class LimitedSpecialUnitPricingTest {
+class LimitedSpecialPricingTest {
 
-  private XForYSpecialUnitPricing xfysup = new XForYSpecialUnitPricing(8, 100);
-  private LimitedSpecialUnitPricing lsup = new LimitedSpecialUnitPricing(xfysup, 8);
+  private XForYSpecialPricing xfysup = new XForYSpecialPricing(8, 100);
+  private LimitedSpecialPricing lsup = new LimitedSpecialPricing(xfysup, 8);
   private LinearItemPricing bup = new LinearItemPricing(70);
 
   @Test
