@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class LimitedSpecialPricingTest {
 
-  private XForYSpecialPricing xfysup = new XForYSpecialPricing(8, 100);
+  private BulkPricing xfysup = new BulkPricing(8, 100);
   private LimitedSpecialPricing lsup = new LimitedSpecialPricing(xfysup, 8);
   private LinearPricing bup = new LinearPricing(70);
 

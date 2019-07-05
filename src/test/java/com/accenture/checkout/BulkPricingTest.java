@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class XForYSpecialPricingTest {
+class BulkPricingTest {
 
-  private XForYSpecialPricing xfysup = new XForYSpecialPricing(8, 100);
+  private BulkPricing xfysup = new BulkPricing(8, 100);
   private LinearPricing linearPricing = new LinearPricing(70);
 
   @Test

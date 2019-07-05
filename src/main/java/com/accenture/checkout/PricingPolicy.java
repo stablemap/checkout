@@ -18,6 +18,10 @@ public class PricingPolicy {
     unitPrices.get(itemName).setMarkdown(amount);
   }
 
+  public void setUnitSpecial(String itemName, SpecialPricing pricingByMultiple) {
+    unitSpecials.put(itemName, pricingByMultiple);
+  }
+
   public boolean pricesUnit(String itemName) {
     return unitPrices.containsKey(itemName);
   }
@@ -39,9 +43,5 @@ public class PricingPolicy {
 
   public int priceForWeight(String itemName, double pounds) {
     return weightPrices.get(itemName).priceFor(pounds);
-  }
-
-  public void setUnitSpecial(String itemName, SpecialPricing pricingByMultiple) {
-    unitSpecials.put(itemName, pricingByMultiple);
   }
 }
